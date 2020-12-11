@@ -185,6 +185,7 @@ var summerHtmlImageMapCreator = (function() {
                 LEFT   : 37,
                 RIGHT  : 39,
                 DELETE : 46,
+                BACKSPACE : 8,
                 I      : 73,
                 S      : 83,
                 C      : 67
@@ -358,6 +359,15 @@ var summerHtmlImageMapCreator = (function() {
                     break;
                 
                 case KEYS.DELETE:
+                    if (state.appMode === 'editing' && state.selectedArea) {
+                        app.removeObject(state.selectedArea);
+                        state.selectedArea = null;
+                        info.unload();
+                    }
+                    
+                    break;
+                    
+                case KEYS.BACKSPACE:
                     if (state.appMode === 'editing' && state.selectedArea) {
                         app.removeObject(state.selectedArea);
                         state.selectedArea = null;
